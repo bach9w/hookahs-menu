@@ -12,7 +12,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	price,
 }) => {
 	return (
-		<div className=" my-2  rounded-xl bg-[#F64668] px-6 py-8 text-white w-full">
+		<div className="my-2 rounded-xl bg-[#F64668] px-6 py-8 text-white w-full overflow-hidden shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:-translate-y-2">
 			<p className="mb-2 text-2xl font-bold">{name}</p>
 			<p className="mb-3">{content}</p>
 			<div className="mb-6 space-y-2 space-x-2">
