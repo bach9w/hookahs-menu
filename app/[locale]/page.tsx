@@ -1,5 +1,6 @@
 import ProductCard from '@/components/product-card';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 const flavoursHookah = [
 	{
@@ -110,15 +111,16 @@ const flavoursHookah = [
 ];
 
 export default function Home() {
+	const t = useTranslations('flavour');
 	return (
 		<>
-			<div className="absolute grid w-full mt-10  object-center justify-center text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+			<div className=" grid w-full mt-10  object-center justify-center text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-5 lg:text-left">
 				{flavoursHookah.map((flavour) => (
 					<ProductCard
 						key={flavour.id}
 						id={flavour.id}
 						name={flavour.name}
-						content={flavour.content}
+						content={t(`${flavour.id}`)}
 						price={flavour.price}
 						src={flavour.src}
 					/>

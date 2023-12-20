@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+
 import { Sofia_Sans } from 'next/font/google';
-import './globals.css';
+import '../globals.css';
 import Header from '@/components/header';
+import { notFound } from 'next/navigation';
+
+const locales = ['en', 'bg'];
 
 const inter = Sofia_Sans({ subsets: ['latin'] });
 
@@ -13,11 +16,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
 	children,
+	params: { locale },
 }: {
 	children: React.ReactNode;
+	params: { locale: string };
 }) {
+	if (!locales.includes(locale as any)) notFound();
 	return (
-		<html lang="en">
+		<html lang={locale}>
 			<Header />
 			<body className={inter.className}>{children}</body>
 		</html>
