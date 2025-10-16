@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@rewind-ui/core";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
