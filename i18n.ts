@@ -1,5 +1,1 @@
-import { getRequestConfig } from 'next-intl/server';
-
-export default getRequestConfig(async ({ locale }) => ({
-	messages: (await import(`./messages/${locale}.json`)).default,
-}));
+// Deprecated; replaced by i18n/request.ts with requestLocale

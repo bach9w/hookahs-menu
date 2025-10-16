@@ -1,5 +1,10 @@
-const withNextIntl = require('next-intl/plugin')();
+const createNextIntlPlugin = require("next-intl/plugin");
+
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 module.exports = withNextIntl({
-	// Other Next.js configuration ...
+	trailingSlash: false,
+	env: {
+		_next_intl_trailing_slash: "off",
+	},
 });
