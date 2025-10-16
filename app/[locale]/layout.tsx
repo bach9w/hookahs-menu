@@ -16,27 +16,21 @@ export const metadata: Metadata = {
 	description: "HOOKAH MENU",
 };
 
-export default async function RootLayout(
-    props: {
-        children: React.ReactNode;
-        params: Promise<{ locale: string }>;
-    }
-) {
-    const params = await props.params;
+export default async function RootLayout(props: {
+	children: React.ReactNode;
+	params: Promise<{ locale: string }>;
+}) {
+	const params = await props.params;
 
-    const {
-        locale
-    } = params;
+	const { locale } = params;
 
-    const {
-        children
-    } = props;
+	const { children } = props;
 
-    if (!locales.includes(locale as any)) notFound();
+	if (!locales.includes(locale as any)) notFound();
 
-    const messages = await getMessages();
+	const messages = await getMessages();
 
-    return (
+	return (
 		<html lang={locale}>
 			<body className={inter.className}>
 				<NextIntlClientProvider messages={messages}>
