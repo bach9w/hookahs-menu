@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import {
 	Card,
 	CardContent,
@@ -25,21 +24,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
 	const eurPrice = (price / 1.95583).toFixed(2);
 	return (
-		<motion.div
-			initial={{ opacity: 0, x: -60 }}
-			transition={{ delay: 0.15 }}
-			whileInView={{ opacity: 1, x: 0 }}
-		>
+		<div className="transition-opacity duration-300">
 			<Card className="max-w-[450px] mt-10 relative overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200">
-				<motion.div
-					initial={{ opacity: 0, scale: 0.98 }}
-					transition={{ delay: 0.1 }}
-					whileInView={{ opacity: 1, scale: 1 }}
-				>
-					<div className=" w-full overflow-hidden">
-						<img src={src} alt={name} className="w-full h-full object-cover" />
-					</div>
-				</motion.div>
+				<div className=" w-full overflow-hidden">
+					<img src={src} alt={name} className="w-full h-full object-cover" />
+				</div>
 
 				<CardHeader>
 					<div className="flex flex-col space-y-1">
@@ -67,7 +56,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 					</div>
 				</CardFooter>
 			</Card>
-		</motion.div>
+		</div>
 	);
 };
 

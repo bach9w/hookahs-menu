@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 
@@ -15,11 +14,7 @@ const Header = () => {
 	if (!isMounted) return null;
 	return (
 		<>
-			<motion.header
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1 }}
-				transition={{ duration: 0.6 }}
-			>
+			<header className="transition-opacity duration-500 opacity-100">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-3 justify-center w-full">
@@ -59,7 +54,7 @@ const Header = () => {
 						</Link>
 					</div>
 				</div>
-			</motion.header>
+			</header>
 		</>
 	);
 };
