@@ -1,6 +1,10 @@
+"use client";
 import ProductCard from "@/components/product-card";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useMemo, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const flavoursHookah = [
 	{
@@ -112,11 +116,53 @@ const flavoursHookah = [
 
 export default function Home() {
 	const t = useTranslations("flavour");
+	const locale = useLocale();
+	const [query, setQuery] = useState("");
+	const [selectedIds, setSelectedIds] = useState<number[]>([]);
+	const [currency, setCurrency] = useState<"BGN" | "EUR">("BGN");
+	const [open, setOpen] = useState(false);
+
+	useEffect(() => {
+		const savedCurrency =
+			typeof window !== "undefined"
+				? window.localStorage.getItem("currency")
+				: null;
+		if (savedCurrency === "EUR" || savedCurrency === "BGN")
+			setCurrency(savedCurrency);
+	}, []);
+	useEffect(() => {
+		if (typeof window !== "undefined")
+			window.localStorage.setItem("currency", currency);
+	}, [currency]);
+
+	const filtered = useMemo(() => {
+		const q = query.trim().toLowerCase();
+		if (!q) return flavoursHookah;
+		return flavoursHookah.filter(
+			(f) =>
+				f.name.toLowerCase().includes(q) ||
+				t(`${f.id}`).toLowerCase().includes(q),
+		);
+	}, [query, t]);
+
 	return (
 		<>
-			<div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mt-8">
+			<div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mt-6 space-y-4">
+				<div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+					<Input
+						placeholder={
+							locale === "bg"
+								? "Търсене по име или вкус..."
+								: "Search by name or flavour..."
+						}
+						value={query}
+						onChange={(e) => setQuery(e.target.value)}
+						className="max-w-xl border-2 border-gray-300 rounded-md p-2 text-white placeholder:text-white"
+					/>
+				</div>
+
 				<div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 place-items-center">
-					{flavoursHookah.map((flavour) => (
+					{filtered.map((flavour) => (
 						<ProductCard
 							key={flavour.id}
 							id={flavour.id}
@@ -124,6 +170,7 @@ export default function Home() {
 							content={t(`${flavour.id}`)}
 							price={flavour.price}
 							src={flavour.src}
+							onSelect={undefined}
 						/>
 					))}
 				</div>
