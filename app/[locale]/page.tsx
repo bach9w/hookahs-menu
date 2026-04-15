@@ -168,7 +168,7 @@ export default function Home() {
 						{locale === "bg" ? "Няма намерени резултати" : "No results found"}
 					</p>
 				) : (
-					<div className="grid grid-cols-1 gap-8 place-items-stretch sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+					<div className="grid grid-cols-1 gap-8 place-items-stretch sm:grid-cols-2 sm:gap-10 lg:grid-cols-3  ">
 						{filtered.map((flavour) => (
 							<ProductCard
 								key={flavour.id}
