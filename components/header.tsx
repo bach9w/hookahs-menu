@@ -14,44 +14,50 @@ const Header = () => {
 	if (!isMounted) return null;
 	return (
 		<>
-			<header className="transition-opacity duration-500 opacity-100">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-					<div className="flex items-center justify-between">
-						<div className="flex items-center gap-3 justify-center w-full">
+			<header className="sticky top-0 z-40 border-b border-[#202020] bg-black transition-opacity duration-500">
+				<div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 py-6 sm:py-8">
+					<div className="flex items-center justify-between gap-4">
+						<div className="flex min-w-0 flex-1 items-center justify-start">
 							<Image
-								className="dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
+								className="h-auto max-h-14 w-auto max-w-[min(200px,55vw)] object-contain object-left sm:max-h-[3.25rem]"
 								src="/logo.png"
 								alt="Sapid Logo"
-								width={150}
-								height={37}
+								width={200}
+								height={52}
 								priority
 							/>
 						</div>
-						<div className="hidden sm:flex items-center gap-2">
-							<Link href="/en">
-								<Button color="purple">EN</Button>
-							</Link>
-							<Link href="/bg">
-								<Button color="purple">BG</Button>
-							</Link>
+						<div className="flex shrink-0 items-center gap-3">
+							<Button
+								variant="outline"
+								size="sm"
+								className={
+									locale === "en"
+										? "min-h-12 min-w-[3.5rem] border-white bg-white/10 px-5 text-sm opacity-100 hover:bg-[#1EAEDB] hover:text-white"
+										: "min-h-12 min-w-[3.5rem] px-5 text-sm"
+								}
+								asChild
+							>
+								<Link href="/en">EN</Link>
+							</Button>
+							<Button
+								variant="outline"
+								size="sm"
+								className={
+									locale === "bg"
+										? "min-h-12 min-w-[3.5rem] border-white bg-white/10 px-5 text-sm opacity-100 hover:bg-[#1EAEDB] hover:text-white"
+										: "min-h-12 min-w-[3.5rem] px-5 text-sm"
+								}
+								asChild
+							>
+								<Link href="/bg">BG</Link>
+							</Button>
 						</div>
 					</div>
-					<div className="mt-3 text-center sm:text-left">
-						<div className="inline-block bg-[#984063] uppercase w-full text-white px-4 py-1 rounded-md text-xl font-bold">
-							{locale === "bg" ? "наргилета меню" : "hookah menu"}
-						</div>
-					</div>
-					<div className="mt-3 sm:hidden flex items-center justify-center gap-2">
-						<Link href="/en">
-							<Button size="sm" color="black">
-								EN
-							</Button>
-						</Link>
-						<Link href="/bg">
-							<Button size="sm" color="black">
-								BG
-							</Button>
-						</Link>
+					<div className="mt-6 border-b border-[#202020] pb-6 text-center">
+						<p className="font-normal text-[clamp(1.5rem,4vw,2.125rem)] uppercase leading-[1.15] tracking-normal text-white">
+							{locale === "bg" ? "Наргилета меню" : "Hookah menu"}
+						</p>
 					</div>
 				</div>
 			</header>

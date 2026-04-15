@@ -1,4 +1,8 @@
 {
+	"ui": {
+		"viewMore": "View more",
+		"price": "Price"
+	},
 	"flavour": {
 		"1": "GRAPEFRUIT AND LIME",
 		"2": "GRAPEFRUIT, LIME AND LEMON",

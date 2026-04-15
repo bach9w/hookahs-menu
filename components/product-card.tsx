@@ -1,12 +1,8 @@
 "use client";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader,
-} from "@/components/ui/card";
+import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "next-intl";
 import {
 	Dialog,
 	DialogContent,
@@ -25,13 +21,12 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
-	id,
 	name,
 	content,
 	price,
 	src,
-	onSelect,
 }) => {
+	const t = useTranslations("ui");
 	const eurPrice = (price / 1.95583).toFixed(2);
 	const tags = content
 		.split(/[,·]/)
@@ -39,15 +34,19 @@ const ProductCard: React.FC<ProductCardProps> = ({
 		.filter(Boolean);
 	return (
 		<div className="transition-opacity duration-300">
-			<Card className="max-w-[450px] mt-10 relative overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200">
-				<div className=" w-full overflow-hidden">
-					<img src={src} alt={name} className="w-full h-full object-cover" />
+			<Card className="relative mt-0 max-w-[450px] overflow-hidden transition-colors duration-200">
+				<div className="flex min-h-[200px] w-full items-center justify-center bg-[#181818] sm:min-h-[220px]">
+					<img
+						src={src}
+						alt={name}
+						className="max-h-[min(280px,55vw)] w-full object-contain object-center p-2"
+					/>
 				</div>
 
-				<CardHeader>
-					<div className="flex flex-col space-y-1">
-						<div className="flex justify-between items-baseline">
-							<span className="text-xl text-gray-800 font-semibold">
+				<CardHeader className="p-5">
+					<div className="flex flex-col space-y-2">
+						<div className="flex items-baseline justify-between">
+							<span className="text-[1.125rem] font-normal uppercase leading-[1.37] tracking-normal text-white">
 								{name}
 							</span>
 						</div>
@@ -60,48 +59,47 @@ const ProductCard: React.FC<ProductCardProps> = ({
 						</div>
 					</div>
 				</CardHeader>
-				<CardFooter>
-					<div className="flex items-center justify-between w-full gap-3">
-						<div className="flex gap-2 items-center w-full">
-							<Badge className="flex-1 text-center flex justify-center">
-								BGN {price}
-							</Badge>
-							<Badge
-								className="flex-1 text-center flex justify-center"
-								variant="secondary"
-							>
-								€ {eurPrice}
-							</Badge>
-						</div>
-						<Dialog>
-							<DialogTrigger asChild>
-								<Button className="shrink-0">Повече</Button>
-							</DialogTrigger>
-							<DialogContent>
-								<DialogHeader>
-									<DialogTitle>{name}</DialogTitle>
-									<DialogDescription>{content}</DialogDescription>
-								</DialogHeader>
-								<div className="mt-2">
-									<img
-										src={src}
-										alt={name}
-										className="w-full rounded-md object-cover"
-									/>
-								</div>
-								<div className="mt-3 flex flex-wrap gap-2">
-									{tags.map((tag, i) => (
-										<Badge key={i} variant={i === 0 ? "default" : "secondary"}>
-											{tag}
-										</Badge>
-									))}
-								</div>
-								<div className="mt-4 text-sm text-muted-foreground">
-									Цена: BGN {price} • € {eurPrice}
-								</div>
-							</DialogContent>
-						</Dialog>
+				<CardFooter className="flex flex-col gap-4 p-5 pt-0 sm:flex-row sm:items-stretch">
+					<div className="flex w-full gap-3">
+						<Badge className="flex min-h-11 flex-1 items-center justify-center py-2 text-center tabular-nums">
+							€ {eurPrice}
+						</Badge>
+						<Badge className="flex min-h-11 flex-1 items-center justify-center py-2 text-center tabular-nums">
+							BGN {price}
+						</Badge>
 					</div>
+					<Dialog>
+						<DialogTrigger asChild>
+							<Button className="w-full shrink-0 sm:w-auto">
+								{t("viewMore")}
+							</Button>
+						</DialogTrigger>
+						<DialogContent>
+							<DialogHeader>
+								<DialogTitle>{name}</DialogTitle>
+								<DialogDescription className="text-base leading-normal text-[#7D7D7D]">
+									{content}
+								</DialogDescription>
+							</DialogHeader>
+							<div className="mt-2 flex min-h-[200px] items-center justify-center bg-[#181818]">
+								<img
+									src={src}
+									alt={name}
+									className="max-h-[320px] w-full object-contain object-center p-2"
+								/>
+							</div>
+							<div className="mt-3 flex flex-wrap gap-2">
+								{tags.map((tag, i) => (
+									<Badge key={i} variant={i === 0 ? "default" : "secondary"}>
+										{tag}
+									</Badge>
+								))}
+							</div>
+							<div className="mt-4 text-sm text-[#7D7D7D]">
+								{t("price")}: € {eurPrice} • BGN {price}
+							</div>
+						</DialogContent>
+					</Dialog>
 				</CardFooter>
 			</Card>
 		</div>

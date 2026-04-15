@@ -1,10 +1,8 @@
 "use client";
 import ProductCard from "@/components/product-card";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const flavoursHookah = [
 	{
@@ -118,22 +116,6 @@ export default function Home() {
 	const t = useTranslations("flavour");
 	const locale = useLocale();
 	const [query, setQuery] = useState("");
-	const [selectedIds, setSelectedIds] = useState<number[]>([]);
-	const [currency, setCurrency] = useState<"BGN" | "EUR">("BGN");
-	const [open, setOpen] = useState(false);
-
-	useEffect(() => {
-		const savedCurrency =
-			typeof window !== "undefined"
-				? window.localStorage.getItem("currency")
-				: null;
-		if (savedCurrency === "EUR" || savedCurrency === "BGN")
-			setCurrency(savedCurrency);
-	}, []);
-	useEffect(() => {
-		if (typeof window !== "undefined")
-			window.localStorage.setItem("currency", currency);
-	}, [currency]);
 
 	const filtered = useMemo(() => {
 		const q = query.trim().toLowerCase();
@@ -147,8 +129,8 @@ export default function Home() {
 
 	return (
 		<>
-			<div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mt-6 space-y-4">
-				<div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+			<div className="px-5 sm:px-8 lg:px-10 max-w-[1200px] mx-auto py-10 sm:py-12 lg:py-14 space-y-10 border-b border-[#202020]">
+				<div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
 					<Input
 						placeholder={
 							locale === "bg"
@@ -157,11 +139,11 @@ export default function Home() {
 						}
 						value={query}
 						onChange={(e) => setQuery(e.target.value)}
-						className="max-w-xl border-2 border-gray-300 rounded-md p-2 text-white placeholder:text-white"
+						className="max-w-xl rounded-none border border-[#7D7D7D] bg-black px-4 py-3 text-base text-white placeholder:text-[#7D7D7D] focus-visible:border-[#29ABE2] focus-visible:ring-[#29ABE2]"
 					/>
 				</div>
 
-				<div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 place-items-center">
+				<div className="grid gap-8 sm:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 place-items-stretch">
 					{filtered.map((flavour) => (
 						<ProductCard
 							key={flavour.id}

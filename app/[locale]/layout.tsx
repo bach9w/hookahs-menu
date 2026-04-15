@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { Sofia_Sans } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/header";
 import { notFound } from "next/navigation";
@@ -9,7 +9,12 @@ import { getMessages } from "next-intl/server";
 
 const locales = ["en", "bg"];
 
-const inter = Sofia_Sans({ subsets: ["latin"] });
+/* LamboType fallback stack per DESIGN.md — Roboto as UI/display substitute */
+const roboto = Roboto({
+	subsets: ["latin", "cyrillic"],
+	weight: ["300", "400", "500", "700"],
+	variable: "--font-roboto",
+});
 
 export const metadata: Metadata = {
 	title: "SAPID",
@@ -31,8 +36,8 @@ export default async function RootLayout(props: {
 	const messages = await getMessages();
 
 	return (
-		<html lang={locale}>
-			<body className={inter.className}>
+		<html lang={locale} className={roboto.variable}>
+			<body className={`${roboto.className} font-sans`}>
 				<NextIntlClientProvider messages={messages}>
 					<Header />
 					{children}
