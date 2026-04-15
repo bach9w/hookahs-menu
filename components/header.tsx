@@ -15,11 +15,11 @@ const Header = () => {
 	return (
 		<>
 			<header className="sticky top-0 z-40 border-b border-[#202020] bg-black transition-opacity duration-500">
-				<div className="max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-10 py-6 sm:py-8">
-					<div className="flex items-center justify-between gap-4">
-						<div className="flex min-w-0 flex-1 items-center justify-start">
+				<div className="mx-auto max-w-[1200px] px-5 py-6 sm:px-8 sm:py-8 lg:px-10">
+					<div className="flex items-center gap-2 sm:gap-4">
+						<div className="flex shrink-0 items-center">
 							<Image
-								className="h-auto max-h-14 w-auto max-w-[min(200px,55vw)] object-contain object-left sm:max-h-[3.25rem]"
+								className="h-auto max-h-11 w-auto max-w-[min(120px,28vw)] object-contain object-left sm:max-h-[3.25rem] sm:max-w-[min(200px,30vw)]"
 								src="/logo.png"
 								alt="Sapid Logo"
 								width={200}
@@ -27,14 +27,17 @@ const Header = () => {
 								priority
 							/>
 						</div>
-						<div className="flex shrink-0 items-center gap-3">
+						<p className="min-w-0 flex-1 text-center font-normal uppercase leading-[1.15] tracking-normal text-white [font-size:clamp(0.7rem,2.8vw,1.75rem)] sm:[font-size:clamp(1rem,2.2vw,2.125rem)]">
+							{locale === "bg" ? "Наргилета меню" : "Hookah menu"}
+						</p>
+						<div className="flex shrink-0 items-center gap-2 sm:gap-3">
 							<Button
 								variant="outline"
 								size="sm"
 								className={
 									locale === "en"
-										? "min-h-12 min-w-[3.5rem] border-white bg-white/10 px-5 text-sm opacity-100 hover:bg-[#1EAEDB] hover:text-white"
-										: "min-h-12 min-w-[3.5rem] px-5 text-sm"
+										? "min-h-11 min-w-[3rem] border-white bg-white/10 px-3 text-xs opacity-100 hover:bg-[#1EAEDB] hover:text-white sm:min-h-12 sm:min-w-[3.5rem] sm:px-5 sm:text-sm"
+										: "min-h-11 min-w-[3rem] px-3 text-xs sm:min-h-12 sm:min-w-[3.5rem] sm:px-5 sm:text-sm"
 								}
 								asChild
 							>
@@ -45,19 +48,14 @@ const Header = () => {
 								size="sm"
 								className={
 									locale === "bg"
-										? "min-h-12 min-w-[3.5rem] border-white bg-white/10 px-5 text-sm opacity-100 hover:bg-[#1EAEDB] hover:text-white"
-										: "min-h-12 min-w-[3.5rem] px-5 text-sm"
+										? "min-h-11 min-w-[3rem] border-white bg-white/10 px-3 text-xs opacity-100 hover:bg-[#1EAEDB] hover:text-white sm:min-h-12 sm:min-w-[3.5rem] sm:px-5 sm:text-sm"
+										: "min-h-11 min-w-[3rem] px-3 text-xs sm:min-h-12 sm:min-w-[3.5rem] sm:px-5 sm:text-sm"
 								}
 								asChild
 							>
 								<Link href="/bg">BG</Link>
 							</Button>
 						</div>
-					</div>
-					<div className="mt-6 border-b border-[#202020] pb-6 text-center">
-						<p className="font-normal text-[clamp(1.5rem,4vw,2.125rem)] uppercase leading-[1.15] tracking-normal text-white">
-							{locale === "bg" ? "Наргилета меню" : "Hookah menu"}
-						</p>
 					</div>
 				</div>
 			</header>
