@@ -17,7 +17,11 @@ const Header = () => {
 			<header className="sticky top-0 z-40 border-b border-[#202020] bg-black transition-opacity duration-500">
 				<div className="mx-auto max-w-[1200px] px-5 py-6 sm:px-8 sm:py-8 lg:px-10">
 					<div className="flex items-center gap-2 sm:gap-4">
-						<div className="flex shrink-0 items-center">
+						<Link
+							href="https://menu.sapid.bg"
+							className="flex shrink-0 items-center"
+							aria-label="Sapid — menu.sapid.bg"
+						>
 							<Image
 								className="h-auto max-h-11 w-auto max-w-[min(120px,28vw)] object-contain object-left sm:max-h-[3.25rem] sm:max-w-[min(200px,30vw)]"
 								src="/logo.png"
@@ -26,7 +30,7 @@ const Header = () => {
 								height={52}
 								priority
 							/>
-						</div>
+						</Link>
 						<p className="min-w-0 flex-1 text-center font-normal uppercase leading-[1.15] tracking-normal text-white [font-size:clamp(0.7rem,2.8vw,1.75rem)] sm:[font-size:clamp(1rem,2.2vw,2.125rem)]">
 							{locale === "bg" ? "Наргилета меню" : "Hookah menu"}
 						</p>
